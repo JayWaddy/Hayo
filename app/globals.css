@@ -2,22 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --pinned: "#00E268";
-  --border-radius: "20px";
+@layer base {
+  :root {
+    --color-primary: #00e268;
+    --color-error: #f87171;
+
+    --color-bg-base: #ffffff;
+    --color-bg-pinned: #f2fdf7;
+
+    --color-icon-base: #18181b;
+    --color-icon-muted: #9ca3af;
+    --color-icon-pinned: #00e268;
+
+    --color-border-base: #18181b;
+    --color-border-muted: #9ca3af;
+
+    --color-text-base: #18181b;
+    --color-text-muted: #9ca3af;
+  }
 }
 
 @layer components {
   .text-info {
-    @apply text-xs opacity-30 text-black;
+    @apply text-xs text-skin-muted;
+  }
+
+  .copy-button {
+    @apply w-14 h-6 text-xs font-semibold text-skin-base border-2 border-skin-base rounded-[20px] bg-skin-base;
   }
 
   .border-ui {
-    @apply border-2 border-black rounded-[20px] bg-white;
+    @apply border-2 border-skin-base rounded-[20px] bg-skin-base;
   }
 
   .border-card {
-    @apply border-2 border-black border-opacity-5 rounded-2xl bg-white;
+    @apply border-2 border-skin-base border-opacity-5 rounded-2xl bg-skin-base;
   }
 }
 

@@ -8,8 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        black: "rgb(24 24 27)",
+      textColor: {
+        skin: {
+          base: "var(--color-text-base)",
+          muted: "var(--color-text-muted)",
+        },
+      },
+      backgroundColor: {
+        skin: {
+          base: "var(--color-bg-base)",
+          pinned: "var(--color-bg-pinned)",
+        },
+      },
+      borderColor: {
+        skin: {
+          base: "var(--color-border-base)",
+          muted: "var(--color-border-muted)",
+          pinned: "var(--color-primary)",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
