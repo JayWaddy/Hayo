@@ -1,9 +1,9 @@
-import Image from "next/image";
+import LanguageConverter from "./components/languageConverter";
 
 export default function Home() {
   return (
-    <main className="flex justify-center">
-      <span>Translator</span>
+    <main className="flex flex-col justify-center mt-6">
+      <LanguageConverter />
     </main>
   );
 }
