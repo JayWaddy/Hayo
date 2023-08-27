@@ -2,9 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --pinned: "#00E268";
+  --border-radius: "20px";
+}
+
 @layer components {
   .text-info {
     @apply text-xs opacity-30 text-black;
+  }
+
+  .border-ui {
+    @apply border-2 border-black rounded-[20px] bg-white;
+  }
+
+  .border-card {
+    @apply border-2 border-black border-opacity-5 rounded-2xl bg-white;
   }
 }
 

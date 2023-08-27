@@ -2,14 +2,16 @@
 
 import React, { ChangeEvent } from "react";
 import { useRef, useState, useEffect } from "react";
-import DeleteIcon from "../icons/deleteIcon";
+import { ClearIcon } from "./icons";
 
 export default function LanguageConverter() {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [textAreaValue, setTextAreaValue] = useState<string>("");
   const [outputValue, setOutputValue] = useState<string>("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null!);
   const outputRef = useRef<HTMLTextAreaElement>(null!);
-  const isInput = inputValue !== "";
+
+  const characterMaxLength = 140;
+  const isInput = textAreaValue !== "";
   const placeholderText = "Translate here!";
 
   useEffect((): void => {
@@ -21,11 +23,11 @@ export default function LanguageConverter() {
     }
 
     // Placeholder for translation functionality
-    setOutputValue(inputValue);
-  }, [textAreaRef, inputValue]);
+    setOutputValue(textAreaValue);
+  }, [textAreaRef, textAreaValue]);
 
-  const resetMessage = (): void => {
-    setInputValue("");
+  const clearInputValue = (): void => {
+    setTextAreaValue("");
     textAreaRef.current.focus();
   };
 
@@ -42,16 +44,16 @@ export default function LanguageConverter() {
   };
 
   return (
-    <div className="border-2 border-black rounded-2xl">
+    <div className="border-ui">
       <div className="w-full h-full border-b-2 border-black p-4">
         <div className="relative flex">
           <span className="left-0 text-info">English</span>
           {isInput && (
             <button
               className="absolute right-0 translate-x-1 -translate-y-1"
-              onClick={resetMessage}
+              onClick={clearInputValue}
             >
-              <DeleteIcon />
+              <ClearIcon />
             </button>
           )}
         </div>
@@ -60,17 +62,17 @@ export default function LanguageConverter() {
           name="input"
           placeholder={placeholderText}
           rows={1}
-          maxLength={250}
+          maxLength={characterMaxLength}
           autoFocus={true}
-          value={inputValue}
-          onChange={(event): void => setInputValue(event.target.value)}
+          value={textAreaValue}
+          onChange={(event): void => setTextAreaValue(event.target.value)}
           ref={textAreaRef}
         />
       </div>
       <div className="p-4">
         <span className="flex text-info">Planco</span>
         <span
-          className={`flex w-full h-auto my-4 text-2xl font-semibold 
+          className={`flex h-auto break-all my-4 text-2xl 
             ${!isInput && "text-zinc-400"}`}
           ref={outputRef}
         >
@@ -78,7 +80,7 @@ export default function LanguageConverter() {
         </span>
         <div className="flex justify-between">
           <span className="flex text-info">
-            {isInput ? textAreaRef.current?.textLength : 0}/250
+            {isInput ? textAreaRef.current?.textLength : 0}/{characterMaxLength}
           </span>
           <button className="text-info" onClick={copyOutputText}>
             copy
