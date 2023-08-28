@@ -1,8 +1,9 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { ClearIcon } from "./icons";
+import { convertEngToPlc } from "../data/languageConverter.service";
 
 export default function LanguageConverter() {
   const [inputValue, setInputValue] = useState<string>("");
@@ -10,33 +11,39 @@ export default function LanguageConverter() {
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const outputRef = useRef<HTMLTextAreaElement>(null!);
 
+  const inputPlaceholderText = "Hello! Write here";
+  const outputPlaceholderText = convertEngToPlc(inputPlaceholderText);
   const characterMaxLength = 140;
   const isInput = inputValue !== "";
-  const placeholderText = "Translate here!";
 
   useEffect((): void => {
     if (inputRef) {
       inputRef.current.style.height = "auto";
       outputRef.current.style.height = "auto";
+
       const inputScrollHeight = inputRef.current.scrollHeight;
       const scrollHeight = outputRef.current.scrollHeight;
 
       inputRef.current.style.height = inputScrollHeight + "px";
       outputRef.current.style.height = scrollHeight + "px";
     }
-
-    // Placeholder for translation functionality
-    setOutputValue(inputValue);
   }, [inputRef, inputValue]);
 
-  const clearInputValue = (): void => {
+  const handleClearTextArea = (): void => {
     setInputValue("");
     setOutputValue("");
     inputRef.current.focus();
   };
 
-  const copyOutputText = () => {
-    //
+  const handleUpdateInput = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    setInputValue(event.target?.value);
+    setOutputValue(convertEngToPlc(event.target?.value));
+  };
+
+  const handleCopyOutputText = (): void => {
+    // TODO
   };
 
   return (
@@ -45,7 +52,7 @@ export default function LanguageConverter() {
         <div className="relative flex">
           <span className="left-0 text-info">English</span>
           {isInput && (
-            <button className="absolute right-0 " onClick={clearInputValue}>
+            <button className="absolute right-0 " onClick={handleClearTextArea}>
               <ClearIcon />
             </button>
           )}
@@ -54,12 +61,12 @@ export default function LanguageConverter() {
           className="my-4 w-full rounded-sm placeholder:text-skin-muted
           resize-none outline-none"
           name="input"
-          placeholder={placeholderText}
+          placeholder={inputPlaceholderText}
           rows={1}
           maxLength={characterMaxLength}
           autoFocus={true}
           value={inputValue}
-          onChange={(event): void => setInputValue(event.target.value)}
+          onChange={(event) => handleUpdateInput(event)}
           ref={inputRef}
         />
         <div className="relative mt-4">
@@ -77,7 +84,7 @@ export default function LanguageConverter() {
           text-2xl break-allplaceholder:text-skin-muted
           ${!isInput && "text-skin-muted"}`}
           name="output"
-          placeholder={placeholderText}
+          placeholder={outputPlaceholderText}
           rows={1}
           value={outputValue}
           ref={outputRef}
@@ -87,7 +94,7 @@ export default function LanguageConverter() {
           <div className="relative mt-4">
             <button
               className="absolute bottom-0 right-0 copy-button"
-              onClick={copyOutputText}
+              onClick={handleCopyOutputText}
             >
               copy
             </button>
