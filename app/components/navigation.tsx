@@ -29,12 +29,12 @@ export default function Navigation() {
   ];
 
   const PageTitle: FunctionComponent<Props> = ({ title }) => {
-    return <span className="flex mx-auto font-bold">{title}</span>;
+    return <span className="mx-auto flex font-bold">{title}</span>;
   };
 
   return (
     <nav className="text-xs">
-      <ul className="relative flex w-full h-full">
+      <ul className="relative flex h-full w-full">
         {pathname === routes[0].path ? (
           <>
             <PageTitle title={routes[0].title} />

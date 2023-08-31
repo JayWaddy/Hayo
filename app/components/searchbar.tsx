@@ -14,12 +14,12 @@ export default function Searchbar() {
   };
 
   return (
-    <div className="relative flex my-auto h-12 border-ui">
-      <span className="left-4 ml-4 my-auto">
+    <div className="border-ui relative my-auto flex h-12">
+      <span className="left-4 my-auto ml-4">
         <SearchIcon />
       </span>
       <input
-        className="ml-4 mr-14 outline-none w-full"
+        className="ml-4 mr-14 w-full outline-none"
         type="text"
         placeholder="Search"
         autoFocus={true}

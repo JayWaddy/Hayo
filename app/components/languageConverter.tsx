@@ -8,6 +8,7 @@ import { convertEngToPlc } from "../data/languageConverter.service";
 export default function LanguageConverter() {
   const [inputValue, setInputValue] = useState<string>("");
   const [outputValue, setOutputValue] = useState<string>("");
+
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const outputRef = useRef<HTMLTextAreaElement>(null!);
 
@@ -16,41 +17,48 @@ export default function LanguageConverter() {
   const characterMaxLength = 140;
   const isInput = inputValue !== "";
 
-  useEffect((): void => {
+  const handleClearTextArea = (): void => {
+    setInputValue("");
+    setOutputValue("");
+    inputRef.current.style.height = "auto";
+    outputRef.current.style.height = "auto";
+    inputRef.current.focus();
+  };
+
+  const handleUpdateInput = (
+    textAreaElement: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
+    setInputValue(textAreaElement.target?.value);
+    setOutputValue(convertEngToPlc(textAreaElement.target?.value));
+
     if (inputRef) {
       inputRef.current.style.height = "auto";
       outputRef.current.style.height = "auto";
 
       const inputScrollHeight = inputRef.current.scrollHeight;
-      const scrollHeight = outputRef.current.scrollHeight;
+      const outputScrollHeight = outputRef.current.scrollHeight;
 
-      inputRef.current.style.height = inputScrollHeight + "px";
-      outputRef.current.style.height = scrollHeight + "px";
+      inputRef.current.style.height = `${inputScrollHeight}px`;
+      outputRef.current.style.height = `${outputScrollHeight}px`;
     }
-  }, [inputRef, inputValue]);
-
-  const handleClearTextArea = (): void => {
-    setInputValue("");
-    setOutputValue("");
-    inputRef.current.focus();
-  };
-
-  const handleUpdateInput = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ): void => {
-    setInputValue(event.target?.value);
-    setOutputValue(convertEngToPlc(event.target?.value));
   };
 
   const handleCopyOutputText = (): void => {
-    // TODO
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+      outputRef.current.select();
+      outputRef.current.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      return;
+    }
+
+    navigator.clipboard.writeText(outputValue);
   };
 
   return (
     <div className="border-ui">
-      <div className="relative w-full h-full border-b-2 border-skin-base p-4">
+      <div className="relative h-full w-full border-b-2 border-skin-base p-4">
         <div className="relative flex">
-          <span className="left-0 text-info">English</span>
+          <span className="text-info left-0">English</span>
           {isInput && (
             <button className="absolute right-0 " onClick={handleClearTextArea}>
               <ClearIcon />
@@ -58,8 +66,8 @@ export default function LanguageConverter() {
           )}
         </div>
         <textarea
-          className="my-4 w-full rounded-sm placeholder:text-skin-muted
-          resize-none outline-none"
+          className="my-4 w-full resize-none rounded-sm
+          outline-none placeholder:text-skin-muted"
           name="input"
           placeholder={inputPlaceholderText}
           rows={1}
@@ -70,18 +78,18 @@ export default function LanguageConverter() {
           ref={inputRef}
         />
         <div className="relative mt-4">
-          <span className="absolute right-0 bottom-0 text-info">
+          <span className="text-info absolute bottom-0 right-0">
             {isInput ? inputRef.current?.textLength : 0}/{characterMaxLength}
           </span>
         </div>
       </div>
       <div className="p-4">
-        <span className="flex text-info">Planco</span>
+        <span className="text-info flex">Planco</span>
         <textarea
           readOnly
           className={`
-          my-4 w-full resize-none outline-none overflow-hidden
-          text-2xl break-allplaceholder:text-skin-muted
+          break-allplaceholder:text-skin-muted my-4 w-full resize-none overflow-hidden
+          text-2xl outline-none
           ${!isInput && "text-skin-muted"}`}
           name="output"
           placeholder={outputPlaceholderText}
@@ -89,11 +97,10 @@ export default function LanguageConverter() {
           value={outputValue}
           ref={outputRef}
         />
-
         {isInput && (
           <div className="relative mt-4">
             <button
-              className="absolute bottom-0 right-0 copy-button"
+              className="copy-button absolute bottom-0 right-0"
               onClick={handleCopyOutputText}
             >
               copy

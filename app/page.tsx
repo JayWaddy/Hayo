@@ -2,7 +2,7 @@ import LanguageConverter from "./components/languageConverter";
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-center mt-6">
+    <main className="relative mt-6 flex flex-col justify-center">
       <LanguageConverter />
     </main>
   );

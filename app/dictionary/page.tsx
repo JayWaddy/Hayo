@@ -3,7 +3,7 @@ import Searchbar from "../components/searchbar";
 
 export default function Page() {
   return (
-    <main className="flex flex-col justify-center mt-6">
+    <main className="mt-6 flex flex-col justify-center">
       <Searchbar />
       <span>Dictionary</span>
     </main>
