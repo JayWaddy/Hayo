@@ -1,4 +1,4 @@
-import { dictionary } from "./data";
+import { dictionary } from "../../data/data";
 
 interface Word {
   eng: string;

@@ -3,7 +3,7 @@
 import React, { FunctionComponent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowIcon } from "./icons";
+import { ArrowIcon } from "../icons/icons";
 
 export default function Navigation() {
   type Props = {

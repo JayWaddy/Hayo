@@ -1,12 +1,19 @@
+export const AddIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        className="fill-skin-muted"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM12 16C11.4477 16 11 15.5523 11 15V13H9C8.44771 13 8 12.5523 8 12C8 11.4477 8.44772 11 9 11H11V9C11 8.44771 11.4477 8 12 8C12.5523 8 13 8.44772 13 9V11H15C15.5523 11 16 11.4477 16 12C16 12.5523 15.5523 13 15 13H13V15C13 15.5523 12.5523 16 12 16Z"
+      />
+    </svg>
+  );
+};
+
 export const ArrowIcon = () => {
   return (
-    <svg
-      width="10"
-      height="8"
-      viewBox="0 0 10 8"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
       <path
         className="fill-black"
         fillRule="evenodd"
@@ -19,13 +26,7 @@ export const ArrowIcon = () => {
 
 export const ClearIcon = () => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         className="fill-black"
         fillRule="evenodd"
@@ -38,18 +39,25 @@ export const ClearIcon = () => {
 
 export const SearchIcon = () => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         className="fill-black"
         fillRule="evenodd"
         clipRule="evenodd"
         d="M15.4193 16.4194C13.4696 18.3691 10.3085 18.3691 8.35873 16.4194C6.40899 14.4696 6.40899 11.3085 8.35873 9.35874C10.3085 7.409 13.4696 7.409 15.4193 9.35874C17.3691 11.3085 17.3691 14.4696 15.4193 16.4194ZM15.9411 18.5893C13.2102 20.5355 9.39451 20.2836 6.94452 17.8336C4.21373 15.1028 4.21373 10.6753 6.94452 7.94452C9.6753 5.21374 14.1028 5.21374 16.8336 7.94452C19.2836 10.3945 19.5355 14.2103 17.5893 16.9412L20.1299 19.4817C20.585 19.9369 20.585 20.6748 20.1299 21.1299C19.6747 21.5851 18.9368 21.5851 18.4817 21.1299L15.9411 18.5893Z"
+      />
+    </svg>
+  );
+};
+
+export const PinnedIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        className="fill-skin-pinned"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM7.29289 12.7071L9.87868 15.2929C10.2692 15.6834 10.9024 15.6834 11.2929 15.2929L16.8787 9.70711C17.2692 9.31658 17.2692 8.68342 16.8787 8.29289C16.4882 7.90237 15.855 7.90237 15.4645 8.29289L10.5858 13.1716L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071Z"
       />
     </svg>
   );

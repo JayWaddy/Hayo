@@ -8,6 +8,7 @@
     --color-error: #f87171;
 
     --color-bg-base: #ffffff;
+    --color-bg-muted: #ffffff;
     --color-bg-pinned: #f2fdf7;
 
     --color-icon-base: #18181b;
@@ -16,27 +17,38 @@
 
     --color-border-base: #18181b;
     --color-border-muted: #9ca3af;
+    --color-border-card: #edeef0;
+    --color-border-pinned: #00e268;
 
     --color-text-base: #18181b;
     --color-text-muted: #9ca3af;
+    --color-text-pinned: #00e268;
   }
 }
 
 @layer components {
-  .text-info {
-    @apply text-xs text-skin-muted;
+  .base-ui {
+    @apply rounded-[20px] border-2 border-skin-base bg-skin-base;
   }
 
-  .copy-button {
-    @apply w-14 h-6 text-xs font-semibold text-skin-base border-2 border-skin-base rounded-[20px] bg-skin-base;
+  .base-card {
+    @apply border-skin-card rounded-[20px] border-2 bg-skin-base;
   }
 
-  .border-ui {
-    @apply border-2 border-skin-base rounded-[20px] bg-skin-base;
+  .pinned-card {
+    @apply rounded-[20px] border-2 border-skin-pinned bg-skin-pinned;
   }
 
-  .border-card {
-    @apply border-2 border-skin-base border-opacity-5 rounded-2xl bg-skin-base;
+  .base-button {
+    @apply h-6 w-14 rounded-[20px] border-2 border-skin-base bg-skin-base text-xs font-semibold text-skin-base;
+  }
+
+  .muted-button {
+    @apply bg-skin-muted h-6 w-14 rounded-[20px] border-2 border-skin-muted text-xs font-semibold text-skin-muted;
+  }
+
+  .pinned-button {
+    @apply text-skin-pinned h-6 w-14 rounded-[20px] border-2 border-skin-pinned bg-skin-pinned text-xs font-semibold;
   }
 }
 

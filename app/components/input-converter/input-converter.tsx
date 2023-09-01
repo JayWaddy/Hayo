@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import { ClearIcon } from "./icons";
-import { convertEngToPlc } from "../data/languageConverter.service";
+import { ClearIcon } from "../icons/icons";
+import { convertEngToPlc } from "./input-converter.logic";
 
-export default function LanguageConverter() {
+export default function InputConverter() {
   const [inputValue, setInputValue] = useState<string>("");
   const [outputValue, setOutputValue] = useState<string>("");
 
@@ -55,10 +55,10 @@ export default function LanguageConverter() {
   };
 
   return (
-    <div className="border-ui">
+    <div className="base-ui">
       <div className="relative h-full w-full border-b-2 border-skin-base p-4">
         <div className="relative flex">
-          <span className="text-info left-0">English</span>
+          <span className="left-0 text-xs text-skin-muted">English</span>
           {isInput && (
             <button className="absolute right-0 " onClick={handleClearTextArea}>
               <ClearIcon />
@@ -78,13 +78,13 @@ export default function LanguageConverter() {
           ref={inputRef}
         />
         <div className="relative mt-4">
-          <span className="text-info absolute bottom-0 right-0">
+          <span className="absolute bottom-0 right-0 text-xs text-skin-muted">
             {isInput ? inputRef.current?.textLength : 0}/{characterMaxLength}
           </span>
         </div>
       </div>
       <div className="p-4">
-        <span className="text-info flex">Planco</span>
+        <span className="flex text-xs text-skin-muted">Planco</span>
         <textarea
           readOnly
           className={`
@@ -100,7 +100,7 @@ export default function LanguageConverter() {
         {isInput && (
           <div className="relative mt-4">
             <button
-              className="copy-button absolute bottom-0 right-0"
+              className="base-button absolute bottom-0 right-0"
               onClick={handleCopyOutputText}
             >
               copy

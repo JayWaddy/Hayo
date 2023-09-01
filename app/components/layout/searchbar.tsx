@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { ClearIcon, SearchIcon } from "./icons";
+import { ClearIcon, SearchIcon } from "../icons/icons";
 
 export default function Searchbar() {
   const [inputValue, setInputValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null!);
-  const isInput = inputValue !== "";
+  const isInput = inputRef.current?.value !== "";
 
   const clearInputValue = (): void => {
     setInputValue("");
@@ -14,18 +14,18 @@ export default function Searchbar() {
   };
 
   return (
-    <div className="border-ui relative my-auto flex h-12">
+    <div className="base-ui relative my-auto flex h-12">
       <span className="left-4 my-auto ml-4">
         <SearchIcon />
       </span>
       <input
-        className="ml-4 mr-14 w-full outline-none"
+        className="ml-4 mr-14 w-full outline-none placeholder:text-skin-muted"
         type="text"
         placeholder="Search"
         autoFocus={true}
         maxLength={25}
         value={inputValue}
-        onChange={(event): void => setInputValue(event.target.value)}
+        onChange={(input): void => setInputValue(input.target.value)}
         ref={inputRef}
       />
       {isInput && (
