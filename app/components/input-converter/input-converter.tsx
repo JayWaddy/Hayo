@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { ClearIcon } from "../icons/icons";
 import { convertEngToPlc } from "./input-converter.logic";
+import CopyButton from "../copy-button/copy-button";
 
 export default function InputConverter() {
   const [inputValue, setInputValue] = useState<string>("");
@@ -31,27 +32,17 @@ export default function InputConverter() {
     setInputValue(textAreaElement.target?.value);
     setOutputValue(convertEngToPlc(textAreaElement.target?.value));
 
+    // BUG: does not auto resize on paste
     if (inputRef) {
-      inputRef.current.style.height = "auto";
-      outputRef.current.style.height = "auto";
+      inputRef.current.style.setProperty("height", "auto");
+      outputRef.current.style.setProperty("height", "auto");
 
       const inputScrollHeight = inputRef.current.scrollHeight;
       const outputScrollHeight = outputRef.current.scrollHeight;
 
-      inputRef.current.style.height = `${inputScrollHeight}px`;
-      outputRef.current.style.height = `${outputScrollHeight}px`;
+      inputRef.current.style.setProperty("height", `${inputScrollHeight}px`);
+      outputRef.current.style.setProperty("height", `${outputScrollHeight}px`);
     }
-  };
-
-  const handleCopyOutputText = (): void => {
-    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-      outputRef.current.select();
-      outputRef.current.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      return;
-    }
-
-    navigator.clipboard.writeText(outputValue);
   };
 
   return (
@@ -74,7 +65,7 @@ export default function InputConverter() {
           maxLength={characterMaxLength}
           autoFocus={true}
           value={inputValue}
-          onChange={(event) => handleUpdateInput(event)}
+          onChange={(element) => handleUpdateInput(element)}
           ref={inputRef}
         />
         <div className="relative mt-4">
@@ -88,8 +79,8 @@ export default function InputConverter() {
         <textarea
           readOnly
           className={`
-          break-allplaceholder:text-skin-muted my-4 w-full resize-none overflow-hidden
-          text-2xl outline-none
+          my-4 w-full resize-none overflow-hidden break-all text-2xl
+          outline-none placeholder:text-skin-muted
           ${!isInput && "text-skin-muted"}`}
           name="output"
           placeholder={outputPlaceholderText}
@@ -99,12 +90,10 @@ export default function InputConverter() {
         />
         {isInput && (
           <div className="relative mt-4">
-            <button
-              className="base-button absolute bottom-0 right-0"
-              onClick={handleCopyOutputText}
-            >
-              copy
-            </button>
+            <CopyButton
+              refElement={outputRef}
+              style={"base-button absolute bottom-0 right-0"}
+            />
           </div>
         )}
       </div>

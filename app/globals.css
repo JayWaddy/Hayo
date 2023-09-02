@@ -40,11 +40,11 @@
   }
 
   .base-button {
-    @apply h-6 w-14 rounded-[20px] border-2 border-skin-base bg-skin-base text-xs font-semibold text-skin-base;
+    @apply h-6 w-14 rounded-[20px] border-2 border-skin-base bg-inherit text-xs font-semibold text-skin-base;
   }
 
   .muted-button {
-    @apply bg-skin-muted h-6 w-14 rounded-[20px] border-2 border-skin-muted text-xs font-semibold text-skin-muted;
+    @apply h-6 w-14 rounded-[20px] border-2 border-skin-muted bg-inherit text-xs font-semibold text-skin-muted;
   }
 
   .pinned-button {
